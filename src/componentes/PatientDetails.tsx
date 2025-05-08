@@ -2,6 +2,7 @@ import type { Patient } from "../types"
 import PatientDetailItem from "./PatientDetailItem"
 import { usePatientStore } from '../store/store'
 
+
 type PatientDetailsProps = {
     patient: Patient
 }
@@ -9,6 +10,10 @@ type PatientDetailsProps = {
 export default function PatientDetails({ patient }: PatientDetailsProps) {
 
     const deletePatient = usePatientStore(state => state.deletePatient)
+
+    const getPatientById = usePatientStore(state => state.getPatientById)
+
+
 
     return (
         <div className="mx-5 my-10 px-5 py-10 bg-white shadow-md rounded-xl">
@@ -25,10 +30,11 @@ export default function PatientDetails({ patient }: PatientDetailsProps) {
 
             <PatientDetailItem label="Fecha" data={patient.date.toString()} />
 
-            <div className="flex justify-around mt-10">
+            <div className="flex flex-col gap-3 lg:flex-row justify-around mt-10">
                 <button
                     type="button"
                     className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white uppercase rounded-lg"
+                    onClick={() => getPatientById(patient.id)}
                 > Editar
                 </button>
                 <button
